@@ -21,7 +21,26 @@
     var minuteI;
     var intTimer;
     var izpisTimer;
-
+    var i=0;
+    var sonic = new Array();
+				sonic[0] = new Image();
+				sonic[0].src = 'images/sonic1.png';
+				sonic[1] = new Image();
+				sonic[1].src = 'images/sonic2.png';
+				sonic[2] = new Image();
+				sonic[2].src = 'images/sonic3.png';
+				sonic[3] = new Image();
+				sonic[3].src = 'images/sonic4.png';
+				sonic[4] = new Image();
+				sonic[4].src = 'images/sonic5.png';
+				sonic[5] = new Image();
+				sonic[5].src = 'images/sonic6.png';
+				sonic[6] = new Image();
+				sonic[6].src = 'images/sonic7.png';
+				sonic[7] = new Image();
+				sonic[7].src = 'images/sonic8.png';
+        sonic[8] = new Image();
+				sonic[8].src = 'images/sonic9.png';
     function stop(){
             document.getElementById("start").disabled = false;
             clearInterval(intervalId);
@@ -32,15 +51,16 @@
     }
     function drawIt() {
         document.getElementById("start").disabled = true;
-        var x = 350;
-        var y = 300;
-        var dx = 0;
-        var dy = 4;
+        var x = 400;
+        var y = 600;
+        var dx = 2;
+        var dy = -4;
         var WIDTH;
         var HEIGHT;
         var r=10;
         var ctx;
         init();
+        
         function init() {
            ctx = $('#canvas')[0].getContext("2d");
            WIDTH = $("#canvas").width();
@@ -49,6 +69,7 @@
            $("#tocke").html(tocke);
            sekunde = 0;
            izpisTimer = "00:00";
+           animationInter=setInterval(anim,1000);
            intTimer = setInterval(timer, 1000);
           return intervalId=setInterval(draw, 10);
         }        
@@ -57,8 +78,21 @@
           ctx.arc(x, y, r, 0, Math.PI*2, true);
           ctx.closePath();
           ctx.fill();
+          
         }
-        
+        function anim(){
+          // ctx.clearRect(x-r,y-r, x,y);
+          // ctx.drawImage(sonic[i],x-r, y-r, 2*r,2*r);
+          // clear();
+          // temp=i+0.1;
+          i++;
+          // i+=0.1;
+          // i=temp/1;
+          if(i>8){
+            i=0;
+          }
+          
+        }
         function rect(x,y,w,h) {
           ctx.beginPath();
           ctx.rect(x,y,w,h);
@@ -77,7 +111,8 @@
 
         function draw() {
           clear();
-          circle(x, y, 10);
+          ctx.drawImage(sonic[i],x-r, y-r, 2*r,2*r);
+          // circle(x, y, 10);
           //premik ploščice levo in desno
           if(rightDown){
         if((paddlex+paddlew) < WIDTH){
@@ -125,7 +160,7 @@
               dx = 8 * ((x-(paddlex+paddlew/2))/paddlew);
               dy = -dy;
             }
-            else if (y + dy > HEIGHT-r){
+            else if (y + dy > HEIGHT-r+r/4){
               clearInterval(intervalId);
               clearInterval(intTimer);
             }
