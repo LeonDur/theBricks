@@ -1,0 +1,22 @@
+#canv{
+    margin:auto;
+    text-align:center;
+    /*padding-top:20px;*/
+}
+
+.buttons{
+    height: 30px;width:50px
+}
+
+#canvas{
+    border:solid black 1px;
+
+}
+#butns{
+    margin:auto;
+    text-align:center;
+    padding-top:20px;
+}
+#presledk{
+    margin-left: 20px;
+}

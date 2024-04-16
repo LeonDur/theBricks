@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="sl">
+    <head>
+        <title>The bricks</title>
+        <script src="script/jQuery.js"></script>
+        <link rel="stylesheet" href="css/style.css"></link>
+        
+    </head>
+    <body>
+        <p>Točke: <mark id="tocke">0</mark> <line id="presledk">Čas: <mark id="cas">00:00</mark></line></p>
+        <div id="canv">
+        <canvas id="canvas" height="800" width="800" ></canvas>
+        </div>
+        <div id="butns">
+        <button id="start" class="buttons" onclick="drawIt()" >Start</button>
+        <button class="buttons" onclick="stop()">Stop</button>
+        </div>
+        <script src="script/script.js"	></script>
+        
+    </body>
+</html>
