@@ -21,7 +21,9 @@
     var minuteI;
     var intTimer;
     var izpisTimer;
-    var i=0;
+    var aCount=0;
+    floor=new Image();
+    floor.src='images/paddle_floor.png';
     var sonic = new Array();
 				sonic[0] = new Image();
 				sonic[0].src = 'images/sonic1.png';
@@ -53,11 +55,11 @@
         document.getElementById("start").disabled = true;
         var x = 400;
         var y = 600;
-        var dx = 2;
-        var dy = -4;
+        var dx = 0;
+        var dy = 4;
         var WIDTH;
         var HEIGHT;
-        var r=10;
+        var r=15;
         var ctx;
         init();
         
@@ -69,7 +71,7 @@
            $("#tocke").html(tocke);
            sekunde = 0;
            izpisTimer = "00:00";
-           animationInter=setInterval(anim,1000);
+           animationInter=setInterval(anim,50);
            intTimer = setInterval(timer, 1000);
           return intervalId=setInterval(draw, 10);
         }        
@@ -81,17 +83,7 @@
           
         }
         function anim(){
-          // ctx.clearRect(x-r,y-r, x,y);
-          // ctx.drawImage(sonic[i],x-r, y-r, 2*r,2*r);
-          // clear();
-          // temp=i+0.1;
-          i++;
-          // i+=0.1;
-          // i=temp/1;
-          if(i>8){
-            i=0;
-          }
-          
+          aCount++;
         }
         function rect(x,y,w,h) {
           ctx.beginPath();
@@ -111,7 +103,11 @@
 
         function draw() {
           clear();
-          ctx.drawImage(sonic[i],x-r, y-r, 2*r,2*r);
+          if(aCount>8){
+            aCount=0;
+          }
+          ctx.drawImage(sonic[aCount],x-r, y-r, 2*r,2*r);
+          
           // circle(x, y, 10);
           //premik ploščice levo in desno
           if(rightDown){
@@ -128,9 +124,10 @@
         paddlex=0;
         }
         }
-        rect(paddlex, HEIGHT-paddleh, paddlew, paddleh);
+        // rect(paddlex, HEIGHT-paddleh, paddlew, paddleh);
+        ctx.drawImage(floor,paddlex, HEIGHT-paddleh, paddlew, paddleh);
         
-        //riši opeke
+        // riši opeke
           for (i=0; i < NROWS; i++) {
             for (j=0; j < NCOLS; j++) {
               if (bricks[i][j] == 1) {
@@ -155,12 +152,12 @@
             dx = -dx;
           if (y + dy < 0+r)
             dy = -dy;
-          else if (y + dy > HEIGHT -r) {
+          else if (y + dy > HEIGHT -2*r) {
             if (x > paddlex && x < paddlex + paddlew){
               dx = 8 * ((x-(paddlex+paddlew/2))/paddlew);
               dy = -dy;
             }
-            else if (y + dy > HEIGHT-r+r/4){
+            else if (y + dy > HEIGHT-r){
               clearInterval(intervalId);
               clearInterval(intTimer);
             }
@@ -174,8 +171,8 @@
 
 
       function init_paddle() {
-        paddleh = 10;
-        paddlew = 90;
+        paddleh = 20;
+        paddlew = 120;
         paddlex = WIDTH / 2-paddlew/2;
       }
       function init_mouse() {
@@ -197,19 +194,19 @@
       }
       $(document).keydown(onKeyDown);
       $(document).keyup(onKeyUp);
-      function onMouseMove(evt) {
-        if (evt.pageX > canvasMinX && evt.pageX < canvasMaxX) {
-          paddlex = evt.pageX - canvasMinX-paddlew/2;
-        }
-      }
-      $(document).mousemove(onMouseMove);
-      init_mouse();
+      // function onMouseMove(evt) {
+      //   if (evt.pageX > canvasMinX && evt.pageX < canvasMaxX) {
+      //     paddlex = evt.pageX - canvasMinX-paddlew/2;
+      //   }
+      // }
+      // $(document).mousemove(onMouseMove);
+      // init_mouse();
       function initbricks() { //inicializacija opek - polnjenje v tabelo
         NROWS = 5;
         NCOLS = 7;
-        BRICKWIDTH = (WIDTH/NCOLS) - 4.5;
+        PADDING = 10;
+        BRICKWIDTH = (WIDTH/NCOLS) - (PADDING+1);
         BRICKHEIGHT = 25;
-        PADDING = 4;
         bricks = new Array(NROWS);
         for (i=0; i < NROWS; i++) {
           bricks[i] = new Array(NCOLS);
