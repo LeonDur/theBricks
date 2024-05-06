@@ -24,6 +24,8 @@
     var aCount=0;
     floor=new Image();
     floor.src='images/paddle_floor.png';
+	brick=new Image();
+	brick.src='images/coin.png';
     var sonic = new Array();
 				sonic[0] = new Image();
 				sonic[0].src = 'images/sonic1.png';
@@ -67,7 +69,7 @@
            ctx = $('#canvas')[0].getContext("2d");
            WIDTH = $("#canvas").width();
            HEIGHT = $("#canvas").height();
-           tocke = 0;
+           // tocke = 0000;
            $("#tocke").html(tocke);
            sekunde = 0;
            izpisTimer = "00:00";
@@ -131,8 +133,8 @@
           for (i=0; i < NROWS; i++) {
             for (j=0; j < NCOLS; j++) {
               if (bricks[i][j] == 1) {
-                rect((j * (BRICKWIDTH + PADDING)) + PADDING,
-                    (i * (BRICKHEIGHT + PADDING)) + PADDING,
+                ctx.drawImage(brick,(j * (BRICKWIDTH + PADDING)) + PADDING,
+                    (i * (BRICKHEIGHT + PADDING) + PADDING),
                     BRICKWIDTH, BRICKHEIGHT);
               }
             }
@@ -153,7 +155,7 @@
           if (y + dy < 0+r)
             dy = -dy;
           else if (y + dy > HEIGHT -2*r) {
-            if (x > paddlex && x < paddlex + paddlew){
+            if ((x > paddlex||x+2*r>paddlex) && x-r < paddlex + paddlew){
               dx = 8 * ((x-(paddlex+paddlew/2))/paddlew);
               dy = -dy;
             }
@@ -203,10 +205,10 @@
       // init_mouse();
       function initbricks() { //inicializacija opek - polnjenje v tabelo
         NROWS = 5;
-        NCOLS = 7;
-        PADDING = 10;
-        BRICKWIDTH = (WIDTH/NCOLS) - (PADDING+1);
-        BRICKHEIGHT = 25;
+        NCOLS = 10;
+		BRICKWIDTH = 50;
+        PADDING = WIDTH/NCOLS-BRICKWIDTH-3;
+        BRICKHEIGHT = 50;
         bricks = new Array(NROWS);
         for (i=0; i < NROWS; i++) {
           bricks[i] = new Array(NCOLS);
