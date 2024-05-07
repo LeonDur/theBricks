@@ -22,6 +22,7 @@
     var intTimer;
     var izpisTimer;
     var aCount=0;
+    var hitcount = 0;
     floor=new Image();
     floor.src='images/paddle_floor.png';
 	brick=new Image();
@@ -46,19 +47,20 @@
         sonic[8] = new Image();
 				sonic[8].src = 'images/sonic9.png';
     function stop(){
-            document.getElementById("start").disabled = false;
+            //document.getElementById("start").disabled = false;
             clearInterval(intervalId);
             izpisTimer = "00:00";
             $("#cas").html(izpisTimer);
             clearInterval(intTimer);
             intervalId=0;
+            
     }
     function drawIt() {
-        document.getElementById("start").disabled = true;
+        //document.getElementById("start").disabled = true;
         var x = 400;
-        var y = 600;
-        var dx = 0;
-        var dy = 4;
+        var y = 750;
+        var dx = Math.random()*3-1;
+        var dy = -4;
         var WIDTH;
         var HEIGHT;
         var r=15;
@@ -69,7 +71,7 @@
            ctx = $('#canvas')[0].getContext("2d");
            WIDTH = $("#canvas").width();
            HEIGHT = $("#canvas").height();
-           // tocke = 0000;
+           tocke = 0;
            $("#tocke").html(tocke);
            sekunde = 0;
            izpisTimer = "00:00";
@@ -148,8 +150,19 @@
           if (y < NROWS * rowheight && row >= 0 && col >= 0 && bricks[row][col] == 1) {
             dy = -dy; bricks[row][col] = 0;
             tocke += 100;
+            hitcount ++;
             $("#tocke").html(tocke);
+            if (hitcount == 2) {
+              sweetWin();
+              dx=0;
+              dy=0;
+              clearInterval(intTimer);
+              
+            }
           }
+          
+            
+          
           if (x + dx > WIDTH -r || x + dx < 0+r)
             dx = -dx;
           if (y + dy < 0+r)
@@ -162,6 +175,7 @@
             else if (y + dy > HEIGHT-r){
               clearInterval(intervalId);
               clearInterval(intTimer);
+              sweet();
             }
 
           }
@@ -228,4 +242,34 @@
         $("#cas").html(izpisTimer);
         }
         initbricks();
+    }
+    function sweet() {
+	
+      Swal.fire({
+      confirmButtonColor: '#9f9c57',
+      background:'#201c24',
+      color:'white', 
+      title:'Game over!',
+      text:'Total score: '+tocke,
+        customClass:{
+          text: "sweet",
+            
+      }
+        
+      });
+    }
+    function sweetWin() {
+	
+      Swal.fire({
+      confirmButtonColor: '#9f9c57',
+      background:'#201c24',
+      color:'white', 
+      title:'You win!',
+      text:'Congratulations!',
+        customClass:{
+          text: "sweet",
+            
+      }
+        
+      });
     }

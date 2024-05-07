@@ -3,9 +3,25 @@
     text-align:center;
     /*padding-top:20px;*/
 }
+body{
+	background: url('../images/background2.jpg') no-repeat fixed center;
+    background-size: cover;
+    font-family: Numbers;
+}
 
-.buttons{
-    height: 30px;width:50px
+#start{
+    height: 50px;width:90px;
+    font-family: Sonic !important;
+    font-size: medium;
+    color:#fccc0f;
+    padding: 0px;
+    background-color: #24428c;
+    border-radius: 25px;
+}
+a{
+    font-family: Numbers !important;
+    color:black;
+    font-size: larger;
 }
 
 #canvas{
@@ -21,7 +37,34 @@
     margin-left: 20px;
 }
 
-body{
-	background: url('../images/background2.jpg') no-repeat fixed center;
-    background-size: cover;
+
+#oznake{
+    margin-left: -720px;
+    text-align: center;
+    padding-left: -100px;
+    font-family: Sonic;
 }
+#naslov{
+    height: 410px;
+    margin: auto;
+    text-align: center;
+    padding-top: 200px;
+    
+}
+#oznake2{
+    margin: auto;
+    text-align: center;
+    
+}
+.sweet{
+    font-family: Numbers;
+}
+
+@font-face {
+    font-family: Sonic;
+    src: url("../fonts/sega.ttf");
+  }
+  @font-face {
+    font-family: Numbers;
+    src: url("../fonts/fortysecondstreethb.regular.ttf");
+  }
