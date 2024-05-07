@@ -39,18 +39,31 @@ a{
 
 
 #oznake{
-    margin-left: -720px;
+    margin:auto;
     text-align: center;
-    padding-left: -100px;
+    align-items: center;
     font-family: Sonic;
+    
+}
+table{
+    margin: auto;
+}
+td{
+    width: 150px;
+    text-align: left;
 }
 #naslov{
-    height: 410px;
+    height: 500px;
     margin: auto;
     text-align: center;
     padding-top: 200px;
     
 }
+#title{
+    margin: auto;
+    text-align: center;
+}
+
 #oznake2{
     margin: auto;
     text-align: center;

@@ -8,12 +8,22 @@
         
     </head>
     <body onload="drawIt()">
-        <div id="oznake">
-        <p>Points: <a id="tocke">0</a> <br>Time: <a id="cas">00:00</a></line></p>
+        <div id="title">
+            <img src="images/title.png">
         </div>
         <div id="canv">
         <canvas id="canvas" height="800" width="800" ></canvas>
         </div>
+        <div id="oznake">
+            <table>
+                <tr>
+                    <td>Points: <a id="tocke">0</a></td> <!--<line id="presledk"></line>-->
+                    <td>Time: <a id="cas">00:00</a></line></td>
+                    <td>Record: <a id="max"></a></td>
+                </tr>    
+            </table>
+        </div>
+        
         <div id="butns">
         <!--<button id="start" class="buttons" onclick="drawIt()" >Start</button>
         <button class="buttons" onclick="stop()">Stop</button>-->

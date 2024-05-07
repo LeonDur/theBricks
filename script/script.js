@@ -23,6 +23,11 @@
     var izpisTimer;
     var aCount=0;
     var hitcount = 0;
+    if(window.localStorage.length==0){
+      localStorage.setItem("rekord",0);
+    }
+    var rekord=localStorage.getItem("rekord");
+    console.log(rekord);
     floor=new Image();
     floor.src='images/paddle_floor.png';
 	brick=new Image();
@@ -71,6 +76,7 @@
            ctx = $('#canvas')[0].getContext("2d");
            WIDTH = $("#canvas").width();
            HEIGHT = $("#canvas").height();
+           $("#max").html(rekord);
            tocke = 0;
            $("#tocke").html(tocke);
            sekunde = 0;
@@ -152,11 +158,16 @@
             tocke += 100;
             hitcount ++;
             $("#tocke").html(tocke);
-            if (hitcount == 2) {
+            if (hitcount == NCOLS*NROWS) {
               sweetWin();
               dx=0;
               dy=0;
+              if(tocke>rekord){
+                localStorage.setItem("rekord",tocke);
+                console.log("uspeh");
+              }
               clearInterval(intTimer);
+              clearInterval(animationInter);
               
             }
           }
@@ -176,6 +187,10 @@
               clearInterval(intervalId);
               clearInterval(intTimer);
               sweet();
+              if(tocke>rekord){
+                localStorage.setItem("rekord",tocke);
+                console.log("uspeh");
+              }
             }
 
           }
@@ -256,7 +271,10 @@
             
       }
         
-      });
+      })
+      .then(function() {
+        window.location = "index.html ";
+    });
     }
     function sweetWin() {
 	
@@ -271,5 +289,7 @@
             
       }
         
-      });
+      }).then(function() {
+        window.location = "index.html ";
+    });
     }
